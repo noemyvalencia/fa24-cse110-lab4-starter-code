@@ -22,7 +22,7 @@ test('renders the Add Expense form', () => {
   // add expense redered
   expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();  
   expect(screen.getByLabelText(/Cost/i)).toBeInTheDocument(); 
-  expect(screen.getByText(/Save/i)).toBeInTheDocument();      
+  expect(screen.getByText(/toBe/i)).toBeInTheDocument();      
 });
 
 test('initial budget is correctly displayed', () => {
