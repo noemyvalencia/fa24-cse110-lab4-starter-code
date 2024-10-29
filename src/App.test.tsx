@@ -20,7 +20,7 @@ test('renders the Add Expense form', () => {
   render(<App />);
 
   // add expense redered
-  expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();  
+  expect(screen.getByLabelText(/toBe/i)).toBeInTheDocument();  
   expect(screen.getByLabelText(/Cost/i)).toBeInTheDocument(); 
   expect(screen.getByText(/Save/i)).toBeInTheDocument();      
 });
