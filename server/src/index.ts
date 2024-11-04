@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
-import { expenses } from "./constants";
+import { createBudgetEndpoints } from "./budget/budget-endpoints";
+import { budget } from "./constants";
+import initDB from "./createTable";
 import { createExpenseEndpoints } from "./expenses/expense-endpoints";
 import { getBudget, updateBudget } from "./budget/budget-utils";
 
@@ -14,15 +16,15 @@ app.use(express.json());
 
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}/expenses`);
 });
 
-
-app.get("/", (req: Request, res: Response) => {
-  res.send({ "data": "Hello, TypeScript Express!" });
-  res.status(200);
-});
-
-createExpenseEndpoints(app, expenses);
-app.get("/budget", getBudget); 
-app.put("/budget", (req: Request, res: Response) => updateBudget(req, res));
+(async () => {
+  const db = await initDB();
+  app.get("/", (res: Response) => {
+      res.send({ "data": "Hello, TypeScript Express!" });
+      res.status(200);
+  });
+  createExpenseEndpoints(app, db);
+  createBudgetEndpoints(app, budget);
+})();
